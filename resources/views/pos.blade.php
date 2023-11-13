@@ -14,12 +14,6 @@
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-default">Nueva Venta</h6>
                 </div>
-                <hr>
-                @foreach ($products as $product)
-                <pre>
-                {{ $product }}
-                </pre>
-                @endforeach
                 <div class="card-body">
                     <div class="row">
                         <div class="col-12">
