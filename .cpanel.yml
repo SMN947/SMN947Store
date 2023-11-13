@@ -1,0 +1,4 @@
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/yrvejbku/public_html/SMN947Store/
+    - /bin/rsync -a --exclude 'index.php' public/ $DEPLOYPATH
