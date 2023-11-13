@@ -160,20 +160,34 @@
         });
 
         function addToCart() {
-            //TODO: consultar inventario al seleccionar el producto
+            // TODO: consultar inventario al seleccionar el producto
             var producto = $("#newProductProduct").val();
             var cantidad = $("#newProductAmount").val();
-            producto = JSON.parse(producto)
-            if (cantidad > producto.productStock) {
-                alert(`No se puede vender ya que solo quedan ${producto.productStock} disponibles`);
+            producto = JSON.parse(producto);
+
+            var existingProductIndex = dataCart.findIndex(item => item.productId === producto.id);
+            if (existingProductIndex !== -1) {
+                var totalAmount = dataCart[existingProductIndex].amount + parseInt(cantidad);
+
+                if (totalAmount > producto.productStock) {
+                    alert(`No se puede vender ya que solo quedan ${producto.productStock} disponibles`);
+                    return;
+                }
+                dataCart[existingProductIndex].amount = totalAmount;
+                dataCart[existingProductIndex].subTotal += producto.productSellPrice * parseInt(cantidad);
             } else {
+                if (parseInt(cantidad) > producto.productStock) {
+                    alert(`No se puede vender ya que solo quedan ${producto.productStock} disponibles`);
+                    return;
+                }
                 dataCart.push({
                     productId: producto.id,
                     producto: producto.productName,
-                    amount: cantidad,
-                    precio: producto.productSellPrice,
-                    subTotal: producto.productSellPrice * cantidad,
-                })
+                    amount: parseInt(cantidad),
+                    productSellPrice: producto.productSellPrice,
+                    productBuyPrice: producto.productBuyPrice,
+                    subTotal: producto.productSellPrice * parseInt(cantidad),
+                });
             }
             renderCart();
         }
