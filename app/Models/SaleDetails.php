@@ -18,7 +18,8 @@ class SaleDetails extends Model
         'sale_id',
         'product_id',
         'amount',
-        'productPrice',
+        'productBuyPrice',
+        'productSellPrice',
         'subTotal'
     ];
 }

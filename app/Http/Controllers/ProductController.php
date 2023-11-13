@@ -42,7 +42,8 @@ class ProductController extends Controller
         $request->validate([
             'productName' => 'required|min:3',
             'category_id' => 'required',
-            'productPrice' => 'required',
+            'productBuyPrice' => 'required',
+            'productSellPrice' => 'required',
             'productUnit' => 'required',
             'productStock' => 'required',
             'productMinStock' => 'required'
@@ -51,7 +52,8 @@ class ProductController extends Controller
         $product = new Product($request->only([
             'productName',
             'category_id',
-            'productPrice',
+            'productBuyPrice',
+            'productSellPrice',
             'productUnit',
             'productStock',
             'productMinStock',

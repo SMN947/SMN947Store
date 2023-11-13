@@ -51,7 +51,8 @@ class PosController extends Controller
                     'sale_id' => $idVenta,
                     'product_id' => $value['productId'],
                     'amount' => $value['amount'],
-                    'productPrice' => $value['precio'],
+                    'productSellPrice' => $value['productSellPrice'],
+                    'productBuyPrice' => $value['productBuyPrice'],
                     'subTotal' => $value['subTotal'],
                 ]);
                 $product->save();

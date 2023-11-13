@@ -24,7 +24,8 @@ return new class extends Migration
             $table->bigInteger("sale_id", false);
             $table->bigInteger("product_id", false);
             $table->integer("amount", false);
-            $table->decimal("productPrice", 8, 2);
+            $table->decimal("productBuyPrice", 8, 2);
+            $table->decimal("productSellPrice", 8, 2);
             $table->decimal("subTotal", 8, 2);
             $table->timestamps();
         });

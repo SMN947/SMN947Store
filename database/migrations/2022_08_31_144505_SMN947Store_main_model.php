@@ -18,7 +18,8 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('category_id')->unsigned();
-            $table->float('productPrice', 8, 2);
+            $table->float('productBuyPrice', 8, 2);
+            $table->float('productSellPrice', 8, 2);
             $table->string('productUnit', 255);
             $table->integer('productStock', 255)->autoIncrement(false);
             $table->integer('productMinStock', 255)->autoIncrement(false);
