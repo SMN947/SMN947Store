@@ -19,7 +19,7 @@ class DashboardController extends Controller
 
         $topSell = DB::table('sale_details')
             ->join('products', 'products.id', '=', 'sale_details.product_id')
-            ->selectRaw('sale_details.product_id, products.productName, sum(sale_details.amount) amount')
+            ->selectRaw(env('DB_PREFIX', 'abc') . 'sale_details.product_id, _products.productName, sum(' . env('DB_PREFIX', 'abc') . 'sale_details.amount) amount')
             ->groupBy('sale_details.product_id', 'products.productName')
             ->orderBy('amount', 'desc')
             ->get();
