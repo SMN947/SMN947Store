@@ -95,7 +95,29 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'productName' => 'required|min:3',
+            'category_id' => 'required',
+            'productBuyPrice' => 'required',
+            'productSellPrice' => 'required',
+            'productUnit' => 'required',
+            'productStock' => 'required',
+            'productMinStock' => 'required'
+        ]);
+
+        $product = Product::find($id);
+        $product->update($request->only([
+            'productName',
+            'category_id',
+            'productBuyPrice',
+            'productSellPrice',
+            'productUnit',
+            'productStock',
+            'productMinStock',
+            'productDescription'
+        ]));
+
+        return redirect('/products')->with("success", "Producto actualizado");
     }
 
     /**
