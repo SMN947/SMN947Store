@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Sale;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
@@ -13,13 +14,23 @@ class DashboardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $ventas = Sale::all();
+        // Default date range (modify as needed)
+        $startDate = $request->input('start_date', now()->startOfMonth());
+        $endDate = $request->input('end_date', now());
+
+        $startDate = Carbon::parse($startDate)->startOfDay();
+        $endDate = Carbon::parse($endDate)->endOfDay();
+
+        $ventas = Sale::whereBetween('created_at', [$startDate, $endDate])->get();
+
+        // $ventas = Sale::all();
 
         $topSell = DB::table('sale_details')
             ->join('products', 'products.id', '=', 'sale_details.product_id')
             ->selectRaw(env('DB_PREFIX', 'abc') . 'sale_details.product_id, _products.productName, sum(' . env('DB_PREFIX', 'abc') . 'sale_details.amount) amount')
+            ->whereBetween('sale_details.created_at', [$startDate, $endDate])
             ->groupBy('sale_details.product_id', 'products.productName')
             ->orderBy('amount', 'desc')
             ->get();
@@ -29,7 +40,13 @@ class DashboardController extends Controller
             ->orderBy(DB::raw('productStock-productMinStock', 'asc'))
             ->get();
 
-        return view('dashboard', ["sales" => $ventas, "topSell" => $topSell, "stock" => $stock]);
+        return view('dashboard', [
+            "sales" => $ventas,
+            "topSell" => $topSell,
+            "stock" => $stock,
+            "startDate" => $startDate,
+            "endDate" => $endDate,
+        ]);
     }
 
     /**

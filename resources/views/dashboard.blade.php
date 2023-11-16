@@ -19,6 +19,24 @@
         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generar Reporte</a>
     </div>
 
+    <form action="{{ route('dashboard.index') }}" method="GET" class="mb-3">
+        <div class="row">
+            <div class="col">
+                <label for="start_date">Fecha de inicio:</label>
+                <input type="date" id="start_date" name="start_date" class="form-control" value="{{ $startDate->format('Y-m-d') }}">
+            </div>
+            <div class="col">
+                <label for="end_date">Fecha de fin:</label>
+                <input type="date" id="end_date" name="end_date" class="form-control" value="{{ $endDate->format('Y-m-d') }}">
+            </div>
+            <div class="col">
+                <br />
+                <button type="submit" class="btn btn-primary">Apply Filter</button>
+            </div>
+        </div>
+    </form>
+
+
     <!-- Content Row -->
     <div class="row">
 
