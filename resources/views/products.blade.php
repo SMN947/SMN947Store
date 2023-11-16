@@ -106,7 +106,7 @@
                                 <th>Disponible</th>
                                 <th>Nivel minimo</th>
                                 <th>Descripcion</th>
-                                <th>Acciones</th>
+                                <th colspan="2">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
