@@ -99,7 +99,9 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Nombre</th>
-                                <th>Precio</th>
+                                <th>Precio Compra</th>
+                                <th>Precio Venta</th>
+                                <th>Ganancia</th>
                                 <th>Unidad</th>
                                 <th>Disponible</th>
                                 <th>Nivel minimo</th>
