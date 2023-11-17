@@ -31,7 +31,7 @@
             </div>
             <div class="col">
                 <br />
-                <button type="submit" class="btn btn-primary">Apply Filter</button>
+                <button type="submit" class="btn btn-primary">Filtrar</button>
             </div>
         </div>
     </form>
