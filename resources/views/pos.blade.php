@@ -1,122 +1,109 @@
 @extends('skeleton')
 
 @section('content')
-<div class="container-fluid">
+<div class="container mx-auto">
 
     <!-- Content Row -->
-    <div class="row">
+    <div class="flex">
 
         <!-- Content Column -->
-        <div class="col-12">
+        <div class="w-full">
 
             <!-- Project Card Example -->
             <div class="card shadow">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-default">Nueva Venta</h6>
+                    <h6 class="m-0 font-bold text-default">Nueva Venta</h6>
                 </div>
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    Venta #{UUID-SELL}
-                                </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-2"></div>
-                                        <div class="col-8 m-1">
-                                            <table class="table table-bordered">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Producto</th>
-                                                        <th colspan="2">Cantidad</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>
-                                                            <select class="form-control" id="newProductProduct">
-                                                                @foreach ($products as $product)
-                                                                <option value="{{ $product }}">
-                                                                    {{ $product->productName }}
-                                                                </option>
-                                                                @endforeach
-                                                            </select>
-                                                        </td>
-                                                        <td>
-                                                            <input type="number" class="form-control" id="newProductAmount">
-                                                        </td>
-                                                        <td>
-                                                            <button class="btn btn-success" id="addElement">Añadir</button>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                    <div id="invoice" class="row p-4 m-1">
-                                        <div class="col-12">
-
-                                            <div class="row">
-                                                <table class="table table-bordered table-striped" id="Venta">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>ID</th>
-                                                            <th>Producto</th>
-                                                            <th>Cantidad</th>
-                                                            <th>Precio</th>
-                                                            <th>SubTotal</th>
-                                                            <th></th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody id="tableCart"></tbody>
-                                                </table>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-8"></div>
-                                                <div class="col-4">
-                                                    <table class="table table-striped">
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>Total</td>
-                                                                <td><span id="totalCart"></span></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Recibido</td>
-                                                                <td>
-                                                                    <input class="form-control" type="number" id="paymentByUser">
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Cambio</td>
-                                                                <td>
-                                                                    <span id="clientCambio"></span>
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                    <div class="flex">
+                        <div class="md:w-2/12 sm:w-full"></div>
+                        <div class="md:w-8/12 sm:w-full m-1">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Producto</th>
+                                        <th>Cantidad</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <select class="form-control" id="newProductProduct">
+                                                @foreach ($products as $product)
+                                                <option value="{{ $product }}">
+                                                    {{ $product->productName }}
+                                                </option>
+                                                @endforeach
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input type="number" class="form-control" id="newProductAmount">
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-success" id="addElement">Añadir</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div id="invoice" class="flex p-4 m-1">
+                        <div class="w-full">
+                            <div class="flex">
+                                <table class="table table-bordered table-striped" id="Venta">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Producto</th>
+                                            <th>Cantidad</th>
+                                            <th>Precio</th>
+                                            <th>SubTotal</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tableCart"></tbody>
+                                </table>
+                            </div>
+                            <div class="flex">
+                                <div class="w-8/12"></div>
+                                <div class="w-4/12">
+                                    <table class="table table-striped">
+                                        <tbody>
+                                            <tr>
+                                                <td>Total</td>
+                                                <td><span id="totalCart"></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Recibido</td>
+                                                <td>
+                                                    <input class="form-control" type="number" id="paymentByUser">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Cambio</td>
+                                                <td>
+                                                    <span id="clientCambio"></span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="card-footer">
-                        <button id="closeSell" class="btn btn-success">Cerrar Venta</button>
-                    </div>
                 </div>
 
+                <div class="card-footer">
+                    <button id="closeSell" class="btn btn-success ml-0">Cerrar Venta</button>
+                </div>
             </div>
-
         </div>
-
     </div>
-    @endsection
+</div>
+@endsection
 
 
-    @section('scripts')
+@section('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
     <script>
         var _token = "{{ csrf_token() }}"
