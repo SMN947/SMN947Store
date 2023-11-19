@@ -63,7 +63,11 @@ class PosController extends Controller
                 //TODO: Actualizar factura en front o detener la compra
             }
         }
-        return response('{"message":"Se ha creado la venta"}', 200)->header('Content-Type', 'text/json');
+        $response = array(
+            "message" => "Se ha creado la venta",
+            "idVenta" => $idVenta
+        );
+        return response(json_encode($response), 200)->header('Content-Type', 'text/json');
     }
 
     /**

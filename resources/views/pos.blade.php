@@ -222,37 +222,27 @@
             }
         }
 
-        function showInvoice() {
-            const invoice = this.document.getElementById("invoice");
-            // console.log(invoice);
-            // console.log(window);
-            var opt = {
-                margin: 0.5,
-                filename: 'myfile.pdf',
-                image: {
-                    type: 'jpeg',
-                    quality: 0.98
-                },
-                html2canvas: {
-                    scale: 2
-                },
-                jsPDF: {
-                    unit: 'mm',
-                    format: 'a4',
-                    orientation: 'portrait'
-                }
-            };
-            // html2pdf().from(invoice).set(opt).save();
+        function showInvoice(id) {
+            window.open(`/invoice/${id}`, '_blank');
+            // const invoice = this.document.getElementById("invoice");
+            // var opt = {
+            //     margin: 0.5,
+            //     filename: 'myfile.pdf',
+            //     image: {
+            //         type: 'jpeg',
+            //         quality: 0.98
+            //     },
+            //     html2canvas: {
+            //         scale: 2
+            //     },
+            //     jsPDF: {
+            //         unit: 'mm',
+            //         format: 'a4',
+            //         orientation: 'portrait'
+            //     }
+            // };
 
-            html2pdf().from(invoice).set(opt).toPdf().get('pdf').then(function(pdfObj) {
-                // pdfObj has your jsPDF object in it, use it as you please!
-                // For instance (untested):
-                pdfObj.autoPrint();
-                window.open(pdfObj.output('bloburl'), '_blank');
-            });
-            // html2pdf().from($("#Venta")).toPdf().get('pdf').then(function(pdfObj) {
-            //     // pdfObj has your jsPDF object in it, use it as you please!
-            //     // For instance (untested):
+            // html2pdf().from(invoice).set(opt).toPdf().get('pdf').then(function(pdfObj) {
             //     pdfObj.autoPrint();
             //     window.open(pdfObj.output('bloburl'), '_blank');
             // });
@@ -274,7 +264,7 @@
                     } else {
                         alert(msg.message);
                     }
-                    showInvoice();
+                    showInvoice(msg.idVenta);
                     setTimeout(() => {
                         resetCart();
                     }, 2000);
