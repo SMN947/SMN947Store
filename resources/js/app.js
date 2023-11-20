@@ -1,3 +1,4 @@
+import './bootstrap';
 import './dataTables';
 import './dataTablesTailwind';
 import Alpine from 'alpinejs';

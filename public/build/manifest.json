@@ -1,16 +1,11 @@
 {
   "resources/js/app.js": {
-    "file": "assets/app.6ddc08ae.js",
+    "file": "assets/app.a5d6c0bb.js",
     "src": "resources/js/app.js",
     "isEntry": true
   },
-  "resources/css/dataTables.css": {
-    "file": "assets/dataTables.df55699e.css",
-    "src": "resources/css/dataTables.css",
-    "isEntry": true
-  },
   "resources/css/app.css": {
-    "file": "assets/app.fd1c29d8.css",
+    "file": "assets/app.d3b52207.css",
     "src": "resources/css/app.css",
     "isEntry": true
   }
