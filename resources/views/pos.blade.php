@@ -34,7 +34,7 @@
     <div class="grid grid-cols-1 gap-4 my-4">
         <x-layout.card>
             <x-layout.card.header>
-                Resumen de ventas
+                Nueva venta
             </x-layout.card.header>
             <x-layout.card.body>
                 <table class="table bg-base-100" id="Venta">
@@ -50,60 +50,44 @@
                     </thead>
                     <tbody id="tableCart"></tbody>
                 </table>
-            </x-layout.card.body>
-        </x-layout.card>
-    </div>
-    <!-- FIN VENTA -->
-</div>
-<div class="container mx-auto">
-    <!-- Content Row -->
-    <div class="flex">
-        <!-- Content Column -->
-        <div class="w-full">
-            <!-- Project Card Example -->
-            <div class="card shadow">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-bold text-default">Nueva Venta</h6>
-                </div>
-                <div class="card-body">
-                    <div id="invoice" class="flex p-4 m-1">
-                        <div class="w-full">
-                            <div class="flex">
-                            </div>
-                            <div class="flex">
-                                <div class="w-8/12"></div>
-                                <div class="w-4/12">
-                                    <table class="table bg-base-100 table-striped">
-                                        <tbody>
-                                            <tr>
-                                                <td>Total</td>
-                                                <td><span id="totalCart"></span></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Recibido</td>
-                                                <td>
-                                                    <input class="input input-bordered w-full max-w-ws" type="number" id="paymentByUser" placeholder="0">
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Cambio</td>
-                                                <td>
-                                                    <span id="clientCambio"></span>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                <div id="invoice" class="flex p-4 m-1">
+                    <div class="w-full">
+                        <div class="flex">
+                        </div>
+                        <div class="flex">
+                            <div class="w-8/12"></div>
+                            <div class="w-4/12">
+                                <table class="table bg-base-100 table-striped">
+                                    <tbody>
+                                        <tr>
+                                            <td>Total</td>
+                                            <td><span id="totalCart"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Recibido</td>
+                                            <td>
+                                                <input class="input input-bordered w-full max-w-ws" type="number" id="paymentByUser" placeholder="0">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Cambio</td>
+                                            <td>
+                                                <span id="clientCambio"></span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="card-footer flex justify-end">
-                    <button id="closeSell" class="btn btn-success">Cerrar Venta</button>
-                </div>
-            </div>
-        </div>
+            </x-layout.card.body>
+            <x-layout.card.footer>
+                <button id="closeSell" class="btn btn-success">Cerrar Venta</button>
+            </x-layout.card.footer>
+        </x-layout.card>
     </div>
+</div>
 </div>
 @endsection
 

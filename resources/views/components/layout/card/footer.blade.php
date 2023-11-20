@@ -1,3 +1,3 @@
-<div class="card-actions justify-end">
+<div class="card-actions justify-end p-4">
     {{$slot}}
 </div>
