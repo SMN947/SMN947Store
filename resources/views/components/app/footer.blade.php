@@ -8,7 +8,7 @@
             <br />
             Under Development Platform
             <br />
-            Current version: alpha-202231119
+            Current version: alpha-202231120
         </p>
     </aside>
     <nav>
