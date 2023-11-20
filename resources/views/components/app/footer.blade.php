@@ -1,4 +1,4 @@
-<footer class="footer p-10 bg-base-200 text-base-content">
+<footer class="footer p-10 bg-base-200 text-base-content mt-6">
     <aside>
         <img src="{{ asset('/images/logo.svg') }}" alt="" width="50" height="50" class="d-inline-block align-text-top">
         <p>

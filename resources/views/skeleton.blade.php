@@ -10,16 +10,7 @@
 </head>
 
 <body>
-    <div class="navbar bg-base-100">
-        <div class="flex-1">
-            <a class="btn btn-ghost text-xl" href="{{ url('/') }}">
-                <img src="{{ asset('/images/logo.svg') }}" alt="" width="30" height="30" class="d-inline-block align-text-top">
-                {{ config('app.name') }}
-            </a>
-        </div>
-        <x-app.navbar></x-app.navbar>
-
-    </div>
+    <x-app.navbar></x-app.navbar>
 
     @if (isset($errors) && count($errors) > 0)
     <div class="alert alert-danger" role="alert">
