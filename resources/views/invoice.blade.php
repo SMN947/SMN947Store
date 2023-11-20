@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" data-theme="light">
 
 <head>
     <meta charset="UTF-8">
@@ -35,7 +35,7 @@
     </script>
 </head>
 
-<body class="font-sans bg-gray-100">
+<body class="container font-sans bg-gray-100 m-auto">
 
     <div class="mt-4 flex justify-center">
         <button id="printButton" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded cursor-pointer" onclick="printInvoice()">Imprimir</button>

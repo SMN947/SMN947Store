@@ -1,73 +1,79 @@
 @extends('skeleton')
 
 @section('content')
-<div class="container mx-auto">
 
+<div class="container m-auto">
+    <div class="grid grid-cols-1 sm:grid-cols-5 gap-4 my-4">
+        <div></div>
+        <div class="join col-span-3 grid grid-cols-5 gap-4">
+            <div class="form-control w-full max-w-xs col-span-2">
+                <label class="label">
+                    <span class="label-text">Producto</span>
+                </label>
+                <select class="select select-bordered w-full max-w-xs" id="newProductProduct">
+                    <option disabled selected class="hidden">Seleccione</option>
+                    @foreach ($products as $product)
+                    <option value="{{ $product }}">
+                        {{ $product->productName }}
+                    </option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-control w-full max-w-xs  col-span-2">
+                <label class="label">
+                    <span class="label-text">Cantidad</span>
+                </label>
+                <input type="number" id="newProductAmount" class="input input-bordered w-full max-w-xs" value="" placeholder="0" />
+            </div>
+            <div class="mt-auto mx-2 w-full max-w-xs col-span-1">
+                <button class="btn btn-outline w-full" id="addElement">Añadir</button>
+            </div>
+        </div>
+    </div>
+    <!-- INICIO VENTA -->
+    <div class="grid grid-cols-1 gap-4 my-4">
+        <x-layout.card>
+            <x-layout.card.header>
+                Resumen de ventas
+            </x-layout.card.header>
+            <x-layout.card.body>
+                <table class="table bg-base-100" id="Venta">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Producto</th>
+                            <th>Cantidad</th>
+                            <th>Precio</th>
+                            <th>SubTotal</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableCart"></tbody>
+                </table>
+            </x-layout.card.body>
+        </x-layout.card>
+    </div>
+    <!-- FIN VENTA -->
+</div>
+<div class="container mx-auto">
     <!-- Content Row -->
     <div class="flex">
-
         <!-- Content Column -->
         <div class="w-full">
-
             <!-- Project Card Example -->
             <div class="card shadow">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-bold text-default">Nueva Venta</h6>
                 </div>
                 <div class="card-body">
-                    <div class="flex">
-                        <div class="md:w-2/12 sm:w-full"></div>
-                        <div class="md:w-8/12 sm:w-full m-1">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>Producto</th>
-                                        <th>Cantidad</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <select class="form-control" id="newProductProduct">
-                                                @foreach ($products as $product)
-                                                <option value="{{ $product }}">
-                                                    {{ $product->productName }}
-                                                </option>
-                                                @endforeach
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <input type="number" class="form-control" id="newProductAmount">
-                                        </td>
-                                        <td>
-                                            <button class="btn btn-success" id="addElement">Añadir</button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
                     <div id="invoice" class="flex p-4 m-1">
                         <div class="w-full">
                             <div class="flex">
-                                <table class="table table-bordered table-striped" id="Venta">
-                                    <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Producto</th>
-                                            <th>Cantidad</th>
-                                            <th>Precio</th>
-                                            <th>SubTotal</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="tableCart"></tbody>
-                                </table>
                             </div>
                             <div class="flex">
                                 <div class="w-8/12"></div>
                                 <div class="w-4/12">
-                                    <table class="table table-striped">
+                                    <table class="table bg-base-100 table-striped">
                                         <tbody>
                                             <tr>
                                                 <td>Total</td>
@@ -76,7 +82,7 @@
                                             <tr>
                                                 <td>Recibido</td>
                                                 <td>
-                                                    <input class="form-control" type="number" id="paymentByUser">
+                                                    <input class="input input-bordered w-full max-w-ws" type="number" id="paymentByUser" placeholder="0">
                                                 </td>
                                             </tr>
                                             <tr>
