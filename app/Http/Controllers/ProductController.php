@@ -6,6 +6,24 @@ use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
+class dinamicForm
+{
+    public $label;
+    public $type;
+    public $id;
+    public $name;
+    public $options;
+
+    public function __construct($label, $type, $id, $name, $options = [])
+    {
+        $this->label = $label;
+        $this->type = $type;
+        $this->id = $id;
+        $this->name = $name;
+        $this->options = $options;
+    }
+}
+
 class ProductController extends Controller
 {
 
@@ -18,7 +36,21 @@ class ProductController extends Controller
     {
         $productos = Product::all();
         $categorias = Category::all();
-        return view('products', ['products' => $productos, 'categories' => $categorias]);
+        $newProductFormFields = [
+            new dinamicForm('Nombre del producto', 'text', 'productName', 'productName'),
+            new dinamicForm('Categoria', 'select', 'category_id', 'category_id', $categorias),
+            new dinamicForm('Precio de Compra', 'number', 'productBuyPrice', 'productBuyPrice'),
+            new dinamicForm('Precio de Venta', 'number', 'productSellPrice', 'productSellPrice'),
+            new dinamicForm('Unidad (Kg, lb, unidad, pliego, etc)', 'text', 'productUnit', 'productUnit'),
+            new dinamicForm('Cantidad disponible', 'number', 'productStock', 'productStock'),
+            new dinamicForm('Cantidad minima para alertar', 'number', 'productMinStock', 'productMinStock'),
+            new dinamicForm('Descripcion', 'text', 'productDescription', 'productDescription'),
+        ];
+        return view('products', [
+            'products' => $productos,
+            'categories' => $categorias,
+            'newProductFormFields' => $newProductFormFields
+        ]);
     }
 
     /**
