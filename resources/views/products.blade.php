@@ -1,9 +1,6 @@
 @extends('skeleton')
 
 @section('content')
-
-<!-- Open the modal using ID.showModal() method -->
-
 <form action="/products" method="POST">
     <div class="container m-auto my-4">
         <x-layout.card>
