@@ -72,9 +72,10 @@
                             <a class="btn btn-danger btn-sm" onclick="modalDelete{{$product->id }}.showModal()">Eliminar</a>
                         </td>
                         <td>
-                            <button class="btn btn-warning btn-sm" data-bs-target="#editModal{{ $product->id }}">Editar</button>
+                            <a class="btn btn-warning btn-sm" onclick="modalEdit{{$product->id }}.showModal()">Editar</a>
                         </td>
                     </tr>
+                    <!-- START DELETE MODAL -->
                     <dialog id="modalDelete{{ $product->id }}" class="modal modal-bottom sm:modal-middle">
                         <div class="modal-box">
                             <h3 class="font-bold text-lg">Eliminar Producto</h3>
@@ -96,63 +97,87 @@
                             </div>
                         </div>
                     </dialog>
-                    <!-- Edit Modal Content -->
-                    <div class="modal fade" id="editModal{{ $product->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Editar Producto</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <!-- END DELETE MODAL -->
+                    <!-- START EDIT MODAL -->
+                    <dialog id="modalEdit{{ $product->id }}" class="modal modal-bottom sm:modal-middle">
+                        <div class="modal-box">
+                            <form action="{{ route('products.update', ['product' => $product->id]) }}" method="POST">
+                                @method('PUT')
+                                @csrf
+
+                                <h3 class="font-bold text-lg">Editar Producto</h3>
+                                <p class="py-4">
+
+                                <div class="form-control w-full max-w-xs">
+                                    <label class="label">
+                                        <span class="label-text">Nombre del producto</span>
+                                    </label>
+                                    <input type="text" id="editProductName" name="productName" value="{{ $product->productName }}" class="input input-bordered w-full max-w-xs" />
                                 </div>
-                                <div class="modal-body">
-                                    <form action="{{ route('products.update', ['product' => $product->id]) }}" method="POST">
-                                        @method('PUT')
-                                        @csrf
-                                        <div class="mb-3">
-                                            <label for="editProductName" class="form-label">Nombre del producto</label>
-                                            <input type="text" class="form-control" id="editProductName" name="productName" value="{{ $product->productName }}" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="editCategoryId" class="form-label">Categoría</label>
-                                            <select class="form-control" id="editCategoryId" name="category_id" required>
-                                                <option value="" selected disabled>Selecciona</option>
-                                                @foreach ($categories as $category)
-                                                <option value="{{ $category->id }}" {{ $category->id == $product->category_id ? 'selected' : '' }}>
-                                                    {{ $category->categoryName }}
-                                                </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="editProductBuyPrice" class="form-label">Precio de Compra</label>
-                                            <input type="text" class="form-control" id="editProductBuyPrice" name="productBuyPrice" value="{{ $product->productBuyPrice }}" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="editProductSellPrice" class="form-label">Precio de Venta</label>
-                                            <input type="text" class="form-control" id="editProductSellPrice" name="productSellPrice" value="{{ $product->productSellPrice }}" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="editProductUnit" class="form-label">Unidad (Kg, lb, unidad, pliego, etc)</label>
-                                            <input type="text" class="form-control" id="editProductUnit" name="productUnit" value="{{ $product->productUnit }}" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="editProductStock" class="form-label">Cantidad disponible</label>
-                                            <input type="text" class="form-control" id="editProductStock" name="productStock" value="{{ $product->productStock }}" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="editProductMinStock" class="form-label">Cantidad mínima para alertar</label>
-                                            <input type="text" class="form-control" id="editProductMinStock" name="productMinStock" value="{{ $product->productMinStock }}" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="editProductDescription" class="form-label">Descripción</label>
-                                            <input type="text" class="form-control" id="editProductDescription" name="productDescription" value="{{ $product->productDescription }}">
-                                        </div>
-                                        <button type="submit" class="btn btn-primary">Guardar cambios</button>
-                                    </form>
+                                <div class="form-control w-full max-w-xs">
+                                    <label class="label">
+                                        <span class="label-text">Categoría</span>
+                                    </label>
+                                    <select class="select select-bordered" id="editCategoryId" name="category_id" required>
+                                        @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}" {{ $category->id == $product->category_id ? 'selected' : '' }}>
+                                            {{ $category->categoryName }}
+                                        </option>
+                                        @endforeach
+                                    </select>
                                 </div>
-                            </div>
+
+
+
+                                <div class="form-control w-full max-w-xs">
+                                    <label class="label">
+                                        <span class="label-text">Precio de Compra</span>
+                                    </label>
+                                    <input type="text" class="input input-bordered w-full max-w-xs" id="editProductBuyPrice" name="productBuyPrice" value="{{ $product->productBuyPrice }}" required>
+                                </div>
+                                <div class="form-control w-full max-w-xs">
+                                    <label class="label">
+                                        <span class="label-text">Precio de Venta</span>
+                                    </label>
+                                    <input type="text" class="input input-bordered w-full max-w-xs" id="editProductSellPrice" name="productSellPrice" value="{{ $product->productSellPrice }}" required>
+                                </div>
+                                <div class="form-control w-full max-w-xs">
+                                    <label class="label">
+                                        <span class="label-text">Unidad (Kg, lb, unidad, pliego, etc)</span>
+                                    </label>
+                                    <input type="text" class="input input-bordered w-full max-w-xs" id="editProductUnit" name="productUnit" value="{{ $product->productUnit }}" required>
+                                </div>
+                                <div class="form-control w-full max-w-xs">
+                                    <label class="label">
+                                        <span class="label-text">Cantidad disponible</span>
+                                    </label>
+                                    <input type="text" class="input input-bordered w-full max-w-xs" id="editProductStock" name="productStock" value="{{ $product->productStock }}" required>
+                                </div>
+                                <div class="form-control w-full max-w-xs">
+                                    <label class="label">
+                                        <span class="label-text">Cantidad mínima para alertar</span>
+                                    </label>
+                                    <input type="text" class="input input-bordered w-full max-w-xs" id="editProductMinStock" name="productMinStock" value="{{ $product->productMinStock }}" required>
+                                </div>
+                                <div class="form-control w-full max-w-xs">
+                                    <label class="label">
+                                        <span class="label-text">Descripción</span>
+                                    </label>
+                                    <input type="text" class="input input-bordered w-full max-w-xs" id="editProductDescription" name="productDescription" value="{{ $product->productDescription }}">
+                                </div>
+                                </p>
+                                <div class="modal-action">
+                                    <button type="button" class="btn btn-secondary" onclick="modalEdit{{$product->id }}.close()">
+                                        No, cancelar
+                                    </button>
+                                    <button type="submit" class="btn btn-primary">
+                                        Guardar cambios
+                                    </button>
+                                </div>
+                            </form>
                         </div>
-                    </div>
+                    </dialog>
+                    <!-- END EDIT MODAL -->
                     @endforeach
                 </tbody>
             </table>
