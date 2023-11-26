@@ -4,6 +4,10 @@
 <form action="/products" method="POST">
     <div class="container m-auto my-4">
         <x-layout.card>
+
+            <x-layout.card.header>
+                Creacion de Producto
+            </x-layout.card.header>
             <x-layout.card.body>
                 @csrf
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 my-4">
