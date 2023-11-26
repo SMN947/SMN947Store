@@ -10,7 +10,7 @@
     <title>{{ config('app.name') }}</title>
 </head>
 
-<body>
+<body x-data="{ theme: 'dracula' }">
     <x-app.navbar></x-app.navbar>
 
     <div class="px-16">
