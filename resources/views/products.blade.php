@@ -73,7 +73,7 @@
                         <td>{{ $product->productMinStock }}</td>
                         <td>{{ $product->productDescription }}</td>
                         <td>
-                            <a class="btn btn-danger btn-sm" onclick="modalDelete{{$product->id }}.showModal()">Eliminar</a>
+                            <a class="btn btn-error btn-sm" onclick="modalDelete{{$product->id }}.showModal()">Eliminar</a>
                         </td>
                         <td>
                             <a class="btn btn-warning btn-sm" onclick="modalEdit{{$product->id }}.showModal()">Editar</a>
