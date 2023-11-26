@@ -14,14 +14,12 @@
     <x-app.navbar></x-app.navbar>
 
     <div class="px-16">
-        @if (isset($errors) && count($errors) > 0)
-        <div class="alert alert-danger" role="alert">
-            <ul class="list-unstyled mb-0">
-                @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-                @endforeach
-            </ul>
+        @if($errors->any())
+        @foreach ($errors->all() as $error)
+        <div class="alert alert-error">
+            <li>{{ $error }}</li>
         </div>
+        @endforeach
         @endif
         @if(session('success'))
         <div role="alert" class="alert alert-success">
