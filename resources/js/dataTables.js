@@ -32,31 +32,7 @@
             return factory($, window, document);
         });
     }
-    else if (typeof exports === 'object') {
-        // CommonJS
-        // jQuery's factory checks for a global window - if it isn't present then it
-        // returns a factory function that expects the window object
-        var jq = require('jquery');
 
-        if (typeof window === 'undefined') {
-            module.exports = function (root, $) {
-                if (!root) {
-                    // CommonJS environments without a window global must pass a
-                    // root. This will give an error otherwise
-                    root = window;
-                }
-
-                if (!$) {
-                    $ = jq(root);
-                }
-
-                return factory($, root, root.document);
-            };
-        }
-        else {
-            return factory(jq, window, window.document);
-        }
-    }
     else {
         // Browser
         window.DataTable = factory(jQuery, window, document);
@@ -8922,12 +8898,12 @@
 * @param {string} direction Direction of the sort to be applied (`asc` or `desc`)
 * @returns {DataTables.Api} this
 *//**
-                                                            * Set the ordering for the table.
-                                                            *
-                                                            * @param {array} order 1D array of sorting information to be applied.
-                                                            * @param {array} [...] Optional additional sorting conditions
-                                                            * @returns {DataTables.Api} this
-                                                            *//**
+                                                                    * Set the ordering for the table.
+                                                                    *
+                                                                    * @param {array} order 1D array of sorting information to be applied.
+                                                                    * @param {array} [...] Optional additional sorting conditions
+                                                                    * @returns {DataTables.Api} this
+                                                                    *//**
 * Set the ordering for the table.
 *
 * @param {array} order 2D array of sorting information to be applied.
