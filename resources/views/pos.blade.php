@@ -198,14 +198,14 @@
     }
 
     function showInvoice(id) {
-        window.open(`/invoice/${id}`, '_blank');
+        window.open(`/{{tenant('path')}}/invoice/${id}`, '_blank');
     }
 
     function saveVenta() {
         if (datosVenta.total > 0 && datosVenta.vueltas >= 0) {
             $.ajax({
                 method: "POST",
-                url: "/pos",
+                url: "/{{tenant('path')}}/pos",
                 data: {
                     _token: _token,
                     cartProducts: dataCart,

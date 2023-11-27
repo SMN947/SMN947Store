@@ -17,7 +17,8 @@ class PosController extends Controller
      */
     public function index()
     {
-        $productos = Product::all();
+        $tenant = tenant();
+        $productos = Product::where('tenant_id', $tenant->id)->get();
         return view('pos', ['products' => $productos]);
     }
 
@@ -39,8 +40,10 @@ class PosController extends Controller
      */
     public function store(Request $request)
     {
-        //Crea la venta
+        $tenant = tenant();
         $venta = new Sale($request->only(['total']));
+        $venta->user_id = auth()->user()->id;
+        $venta->tenant_id = $tenant->id;
         $venta->save();
         $idVenta = $venta->id;
 
@@ -55,6 +58,7 @@ class PosController extends Controller
                     'productBuyPrice' => $value['productBuyPrice'],
                     'subTotal' => $value['subTotal'],
                 ]);
+                $product->tenant_id = $tenant->id;
                 $product->save();
                 DB::table('products')
                     ->where("id", $value['productId'])

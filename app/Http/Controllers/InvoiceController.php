@@ -47,17 +47,24 @@ class InvoiceController extends Controller
      */
     public function show($id)
     {
+        $tenant = tenant();
         $sale = DB::table('sales')
+            ->where('tenant_id', $tenant->id)
             ->where('sales.id', $id)
-            ->get();
+            ->first();
+
+        if (!$sale) {
+            abort(404); // Sale not found, return a 404 response
+        }
 
         $saleDetails = DB::table('sale_details')
+            ->where('sale_details.tenant_id', $tenant->id)
             ->where('sale_details.sale_id', $id)
             ->join('products', 'products.id', '=', 'sale_details.product_id')
             ->get();
 
-        $datePart = date('Ymd', strtotime($sale[0]->created_at));
-        $receiptNumber = $datePart . '-' . $sale[0]->id;
+        $datePart = date('Ymd', strtotime($sale->created_at));
+        $receiptNumber = $datePart . '-' . $sale->id;
 
         return view('invoice', ['receiptNumber' => $receiptNumber, 'sale' => $sale, 'saleDetails' => $saleDetails]);
     }

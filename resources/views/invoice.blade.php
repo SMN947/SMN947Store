@@ -54,7 +54,7 @@
             <div class="text-right flex justify-between">
                 <div>
                     <p class="text-xl">Recibo N° {{ $receiptNumber }}</p>
-                    <p>{{ $sale[0]->created_at }}</p>
+                    <p>{{ $sale->created_at }}</p>
                 </div>
             </div>
         </div>
@@ -79,7 +79,7 @@
                 @endforeach
                 <tr>
                     <td class="py-2 px-4 border-b font-bold text-center" colspan="3">Total</td>
-                    <td class="py-2 px-4 border-b font-bold text-green-600">{{ $sale[0]->total }}</td>
+                    <td class="py-2 px-4 border-b font-bold text-green-600">{{ $sale->total }}</td>
                 </tr>
             </tbody>
         </table>

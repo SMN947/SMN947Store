@@ -16,6 +16,7 @@ class DashboardController extends Controller
      */
     public function index(Request $request)
     {
+        $tenant = tenant();
         // Default date range (modify as needed)
         $startDate = $request->input('start_date', now()->startOfMonth());
         $endDate = $request->input('end_date', now());
@@ -23,11 +24,13 @@ class DashboardController extends Controller
         $startDate = Carbon::parse($startDate)->startOfDay();
         $endDate = Carbon::parse($endDate)->endOfDay();
 
-        $ventas = Sale::whereBetween('created_at', [$startDate, $endDate])->get();
+        $ventas = Sale::where('tenant_id', $tenant->id)
+            ->whereBetween('created_at', [$startDate, $endDate])->get();
 
         // $ventas = Sale::all();
 
         $topSell = DB::table('sale_details')
+            ->where('sale_details.tenant_id', $tenant->id)
             ->join('products', 'products.id', '=', 'sale_details.product_id')
             ->selectRaw(env('DB_PREFIX', 'abc') . 'sale_details.product_id, _products.productName, sum(' . env('DB_PREFIX', 'abc') . 'sale_details.amount) amount')
             ->whereBetween('sale_details.created_at', [$startDate, $endDate])
@@ -36,6 +39,7 @@ class DashboardController extends Controller
             ->get();
 
         $stock = DB::table('products')
+            ->where('products.tenant_id', $tenant->id)
             ->selectRaw('productName,productStock,productMinStock,productStock-productMinStock toMinStock')
             ->orderBy(DB::raw('productStock-productMinStock', 'asc'))
             ->get();
