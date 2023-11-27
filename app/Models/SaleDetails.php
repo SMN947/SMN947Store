@@ -15,6 +15,7 @@ class SaleDetails extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'tenant_id',
         'sale_id',
         'product_id',
         'amount',

@@ -9,6 +9,8 @@ class Sale extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'tenant_id',
+        'user_id',
         'total'
     ];
     public function saleDetails()
