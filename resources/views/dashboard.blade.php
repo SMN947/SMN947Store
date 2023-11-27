@@ -13,7 +13,7 @@
 <div class="container m-auto">
     <div class="grid grid-cols-1 sm:grid-cols-5 gap-4 my-4">
         <div></div>
-        <form action="{{ route('dashboard.index') }}" method="GET" class="col-span-3">
+        <form action="{{ route('dashboard.index',['tenant'=>tenant('path')]) }}" method="GET" class="col-span-3">
             <div class="join grid grid-cols-5 gap-4">
                 <div class="form-control w-full max-w-xs col-span-2">
                     <label class="label">

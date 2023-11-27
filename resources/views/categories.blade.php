@@ -61,7 +61,7 @@
                                     <button type="button" class="btn btn-secondary" onclick="modalDelete{{$category->id }}.close()">
                                         No, cancelar
                                     </button>
-                                    <form action="{{ route('categories.destroy', ['category' => $category->id]) }}" method="POST">
+                                    <form action="{{ route('categories.destroy', ['category' => $category->id,'tenant'=>tenant('path')]) }}" method="POST">
                                         @method('DELETE')
                                         @csrf
                                         <button type="submit" class="btn btn-primary">

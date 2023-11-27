@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('tenant_id')->unsigned();
+            $table->foreign('tenant_id')->references('id')->on('tenants');
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
@@ -31,6 +33,10 @@ return new class extends Migration
      */
     public function down()
     {
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropForeign(['tenant_id']); // Remove foreign key constraint
+        });
+
         Schema::dropIfExists('users');
     }
 };

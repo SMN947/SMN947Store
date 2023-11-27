@@ -2,7 +2,7 @@
     <div class="flex-1">
         <a class="btn btn-ghost text-xl" href="{{ url('/') }}">
             <img src="{{ asset('/images/logo.svg') }}" alt="" width="30" height="30" class="d-inline-block align-text-top">
-            {{ config('app.name') }}
+            {{ config('app.name') }} - {{tenant('path')}}
         </a>
     </div>
 
@@ -11,16 +11,16 @@
             @if (Route::has('login'))
             @auth
             <li class="nav-item">
-                <a href="{{ url('/dashboard') }}" class="nav-link {{ Request::path() == 'dashboard' ? 'active' : '' }}">Dashboard</a>
+                <a href="{{ url(tenant('path').'/dashboard') }}" class="nav-link {{ Request::path() == 'dashboard' ? 'active' : '' }}">Dashboard</a>
             </li>
             <li class="nav-item">
-                <a href="{{ url('/pos') }}" class="nav-link {{ Request::path() == 'pos' ? 'active' : '' }}">Venta</a>
+                <a href="{{ url(tenant('path').'/pos') }}" class="nav-link {{ Request::path() == 'pos' ? 'active' : '' }}">Venta</a>
             </li>
             <li class="nav-item">
-                <a href="{{ url('/products') }}" class="nav-link {{ Request::path() == 'products' ? 'active' : '' }}">Productos</a>
+                <a href="{{ url(tenant('path').'/products') }}" class="nav-link {{ Request::path() == 'products' ? 'active' : '' }}">Productos</a>
             </li>
             <li class="nav-item">
-                <a href="{{ url('/categories') }}" class="nav-link {{ Request::path() == 'categories' ? 'active' : '' }}">Categorias</a>
+                <a href="{{ url(tenant('path').'/categories') }}" class="nav-link {{ Request::path() == 'categories' ? 'active' : '' }}">Categorias</a>
             </li>
             <li>
                 <div class="form-control p-0 m-0">

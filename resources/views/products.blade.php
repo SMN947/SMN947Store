@@ -91,7 +91,7 @@
                                 <button type="button" class="btn btn-secondary" onclick="modalDelete{{$product->id }}.close()">
                                     No, cancelar
                                 </button>
-                                <form action="{{ route('products.destroy', ['product' => $product->id]) }}" method="POST">
+                                <form action="{{ route('products.destroy', ['product' => $product->id,'tenant'=>tenant('path')]) }}" method="POST">
                                     @method('DELETE')
                                     @csrf
                                     <button type="submit" class="btn btn-primary">
@@ -105,7 +105,7 @@
                     <!-- START EDIT MODAL -->
                     <dialog id="modalEdit{{ $product->id }}" class="modal modal-bottom sm:modal-middle">
                         <div class="modal-box">
-                            <form action="{{ route('products.update', ['product' => $product->id]) }}" method="POST">
+                            <form action="{{ route('products.update', ['product' => $product->id,'tenant'=>tenant('path')]) }}" method="POST">
                                 @method('PUT')
                                 @csrf
 

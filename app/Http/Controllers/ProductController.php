@@ -34,8 +34,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $productos = Product::all();
-        $categorias = Category::all();
+        $tenant = tenant();
+        $productos = Product::where('tenant_id', $tenant->id)->get();
+        $categorias = Category::where('tenant_id', $tenant->id)->get();
         $newProductFormFields = [
             new dinamicForm('Nombre del producto', 'text', 'productName', 'productName'),
             new dinamicForm('Categoria', 'select', 'category_id', 'category_id', $categorias),
@@ -71,6 +72,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        $tenant = tenant();
         $request->validate([
             'productName' => 'required|min:3',
             'category_id' => 'required',
@@ -91,6 +93,7 @@ class ProductController extends Controller
             'productMinStock',
             'productDescription'
         ]));
+        $product->tenant_id = $tenant->id;
         $product->save();
 
         return redirect('/products')->with("success", "Producto creado");
@@ -127,6 +130,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $tenant = tenant();
         $request->validate([
             'productName' => 'required|min:3',
             'category_id' => 'required',
@@ -137,7 +141,7 @@ class ProductController extends Controller
             'productMinStock' => 'required'
         ]);
 
-        $product = Product::find($id);
+        $product = Product::where('tenant_id', $tenant->id)->find($id);
         $product->update($request->only([
             'productName',
             'category_id',
@@ -161,7 +165,8 @@ class ProductController extends Controller
     public function destroy($id)
     {
         //TODO: Revisar si el producto esta en ventas para no eliminarlo
-        $product = Product::find($id);
+        $tenant = tenant();
+        $product = Product::where('tenant_id', $tenant->id)->find($id);
         $product->delete();
         return redirect('products')->with('success', 'Se elimino el producto');
     }
