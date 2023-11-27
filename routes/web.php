@@ -5,7 +5,9 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PosController;
 use App\Http\Controllers\InvoiceController;
+use App\Models\Tenant;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use Stancl\Tenancy\Middleware\InitializeTenancyByPath;
 
 /*
@@ -22,7 +24,13 @@ use Stancl\Tenancy\Middleware\InitializeTenancyByPath;
 require __DIR__ . '/auth.php';
 
 Route::get('/', function () {
-    return view('welcome');
+    if (Auth::check()) {
+        $authUser = Auth::user();
+        $tenantPath = Tenant::where('id', $authUser->tenant_id)->first()->path;
+        return redirect()->route('dashboard.home', ['tenant' => $tenantPath]);
+    } else {
+        return view('welcome');
+    }
 });
 
 Route::group(['prefix' => '/{tenant}', 'middleware' => [InitializeTenancyByPath::class]], function () {
