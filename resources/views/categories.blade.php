@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container m-auto my-4">
-    <form action="/categories" method="POST">
+    <form action="/{{tenant('path')}}/categories" method="POST">
         <x-layout.card>
             <x-layout.card.header>
                 Creacion de Categoria

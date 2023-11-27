@@ -15,7 +15,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categorias = Category::all();
+        $tenant = tenant();
+        $categorias = Category::where('tenant_id', $tenant->id)->get();
         return view('categories', ['categories' => $categorias]);
     }
 
@@ -37,14 +38,16 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        $tenant = tenant();
         $request->validate(['categoryName' => 'required|min:3']);
 
         $category = new Category($request->only([
             'categoryName'
         ]));
+        $category->tenant_id = $tenant->id;
         $category->save();
 
-        return redirect('/categories')->with("success", "Categoria creada");
+        return redirect('/' . $tenant->path . '/categories')->with("success", "Categoria creada");
     }
 
     /**
@@ -89,14 +92,15 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $category = Category::find($id);
+        $tenant = tenant();
+        $category = Category::where('tenant_id', $tenant->id)->find($id);
         $products = $category->products();
 
         if ($products->count() != 0) {
-            return redirect('categories')->withErrors("No se puede eliminar la categoria '" . $category->categoryName . "', por que tiene productos asignados");
+            return redirect('/' . $tenant->path . '/categories')->withErrors("No se puede eliminar la categoria '" . $category->categoryName . "', por que tiene productos asignados");
         } else {
             $category->delete();
-            return redirect('categories')->with('success', 'Se elimino la categoria');
+            return redirect('/' . $tenant->path . '/categories')->with('success', 'Se elimino la categoria');
         }
     }
 }
