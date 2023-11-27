@@ -96,7 +96,7 @@ class ProductController extends Controller
         $product->tenant_id = $tenant->id;
         $product->save();
 
-        return redirect('/products')->with("success", "Producto creado");
+        return redirect('/' . $tenant->path . '/products')->with("success", "Producto creado");
     }
 
     /**
@@ -153,7 +153,7 @@ class ProductController extends Controller
             'productDescription'
         ]));
 
-        return redirect('/products')->with("success", "Producto actualizado");
+        return redirect('/' . $tenant->path . '/products')->with("success", "Producto actualizado");
     }
 
     /**
@@ -168,6 +168,6 @@ class ProductController extends Controller
         $tenant = tenant();
         $product = Product::where('tenant_id', $tenant->id)->find($id);
         $product->delete();
-        return redirect('products')->with('success', 'Se elimino el producto');
+        return redirect('/' . $tenant->path . '/products')->with('success', 'Se elimino el producto');
     }
 }

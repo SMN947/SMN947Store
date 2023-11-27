@@ -1,7 +1,7 @@
 @extends('skeleton')
 
 @section('content')
-<form action="/products" method="POST">
+<form action="/{{tenant('path')}}/products" method="POST">
     <div class="container m-auto my-4">
         <x-layout.card>
 
