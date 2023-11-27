@@ -18,7 +18,7 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('categoryName', 255);
-            $table->bigInteger('tenant_id')->unsigned()->nullable();
+            $table->string('tenant_id');
             $table->foreign('tenant_id')->references('id')->on('tenants');
             $table->timestamps();
         });
@@ -27,7 +27,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('category_id')->unsigned();
             $table->foreign('category_id')->references('id')->on('categories');
-            $table->bigInteger('tenant_id')->unsigned()->nullable();
+            $table->string('tenant_id');
             $table->foreign('tenant_id')->references('id')->on('tenants');
             $table->float('productBuyPrice', 8, 2);
             $table->float('productSellPrice', 8, 2);

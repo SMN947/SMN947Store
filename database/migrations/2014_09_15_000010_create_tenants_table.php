@@ -17,14 +17,14 @@ class CreateTenantsTable extends Migration
     public function up(): void
     {
         Schema::create('tenants', function (Blueprint $table) {
-            $table->id();
+            $table->string('id')->unique();
             $table->string('name')->unique();
             $table->string('plan');
             $table->string('status');
             $table->string('contact');
             $table->string('email')->unique();
             $table->timestamp('renewalDate');
-            $table->string('path');
+            $table->string('path')->unique();
             $table->timestamps();
             $table->json('data')->nullable();
         });

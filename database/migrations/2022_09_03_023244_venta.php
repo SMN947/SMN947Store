@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->bigInteger('tenant_id')->unsigned();
+            $table->string('tenant_id');
             $table->foreign('tenant_id')->references('id')->on('tenants');
             $table->decimal('total', 8, 2);
             $table->timestamps();
@@ -25,7 +25,7 @@ return new class extends Migration
 
         Schema::create('sale_details', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('tenant_id')->unsigned();
+            $table->string('tenant_id');
             $table->foreign('tenant_id')->references('id')->on('tenants');
             $table->bigInteger('sale_id')->unsigned();
             $table->foreign('sale_id')->references('id')->on('sales');

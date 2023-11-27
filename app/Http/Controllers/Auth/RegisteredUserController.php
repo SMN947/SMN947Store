@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Tenant;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -37,9 +38,23 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'storeName' => ['required', 'string', 'unique:tenants,name'],
+            'storePath' => ['required', 'string', 'unique:tenants,path'],
+        ]);
+
+        $tenant = Tenant::create([
+            'id' => $request->storePath,
+            'name' => $request->storeName,
+            'plan' => 'free',
+            'status' => 'active',
+            'contact' => $request->name,
+            'email' => $request->email,
+            'renewalDate' => now(),
+            'path' => $request->storePath
         ]);
 
         $user = User::create([
+            'tenant_id' => $tenant->path,
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
@@ -49,6 +64,7 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        // return redirect(RouteServiceProvider::HOME);
+        return redirect('/' . $tenant->path . '/dashboard');
     }
 }

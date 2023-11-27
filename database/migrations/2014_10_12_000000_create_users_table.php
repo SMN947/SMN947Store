@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('tenant_id')->unsigned();
+            $table->string('tenant_id');
             $table->foreign('tenant_id')->references('id')->on('tenants');
             $table->string('name');
             $table->string('email')->unique();
