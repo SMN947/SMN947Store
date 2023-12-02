@@ -2,11 +2,9 @@
     <aside>
         <img src="{{ asset('/images/logo.svg') }}" alt="" width="50" height="50" class="d-inline-block align-text-top">
         <p>
-            <b>SMN947Store</b>
+            por <b>SMN947</b>
             <br />
             <a href="mailto:me@smn947.com.co">me@smn947.com.co</a>
-            <br />
-            Under Development Platform
             <br />
             Current version: alpha-20231127
         </p>
@@ -19,8 +17,8 @@
     </nav>
     <nav>
         <header class="footer-title">Legal</header>
-        <a class="link link-hover">Terminos de use</a>
+        <a class="link link-hover">Terminos de Uso</a>
         <a class="link link-hover">Politica de Privacidad</a>
-        <a class="link link-hover">Politica de Cookie</a>
+        <a class="link link-hover">Politica de Cookies</a>
     </nav>
 </footer>
