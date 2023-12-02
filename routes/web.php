@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PosController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\LandingController;
 use App\Models\Tenant;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -27,7 +28,7 @@ Route::get('/', function () {
     if (Auth::check()) {
         $authUser = Auth::user();
         $tenantPath = Tenant::where('id', $authUser->tenant_id)->first()->path;
-        return redirect()->route('dashboard.home', ['tenant' => $tenantPath]);
+        return redirect()->route('landing', ['tenant' => $tenantPath]);
     } else {
         return view('welcome');
     }
@@ -35,7 +36,7 @@ Route::get('/', function () {
 
 Route::group(['prefix' => '/{tenant}', 'middleware' => [InitializeTenancyByPath::class]], function () {
     // Routes that require multitenancy middleware
-    Route::get('/', [DashboardController::class, 'index'])->middleware(['auth'])->name('dashboard.home');
+    Route::get('/', [LandingController::class, 'index'])->name('landing');
     Route::resource('dashboard', DashboardController::class)->middleware(['auth']);
     Route::resource('products', ProductController::class)->middleware(['auth']);
     Route::resource('categories', CategoryController::class)->middleware(['auth']);
