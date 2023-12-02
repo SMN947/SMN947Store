@@ -2,10 +2,12 @@
     <div class="flex-1">
         <a class="btn btn-ghost text-xl" href="{{ url('/'.tenant('path').'/') }}">
             <img src="{{ asset('/images/logo.svg') }}" alt="" width="30" height="30" class="d-inline-block align-text-top">
+
+            @if (tenant('path') != '')
+            {{tenant('path')}}
+            @else
             {{ config('app.name') }}
-            @auth
-            - {{tenant('path')}}
-            @endauth
+            @endif
         </a>
     </div>
     <div class="flex-none">
@@ -32,33 +34,23 @@
                     </a>
                 </form>
             </li>
-            <li>
-                <div class="form-control p-0 m-0">
-                    <select class="select select-bordered" id="theme" x-model="theme" x-on:change="document.documentElement.setAttribute('data-theme', theme)">
-                        <option value="dracula">Dracula</option>
-                        <option value="light">Light</option>
-                        <option value="dark">Dark</option>
-                        <option value="cupcake">Cupcake</option>
-                        <option value="black">Black</option>
-                        <option value="cyberpunk">Cyberpunk</option>
-                        <option value="retro">Retro</option>
-                    </select>
-                </div>
-            </li>
             <li class="nav-item">
                 <a href="#">Hola {{ Auth::user()->name }}!</a>
             </li>
             @else
             <li class="nav-item">
-                <a href="{{ route('login') }}" class="nav-link {{ Request::path() == 'login' ? 'active' : '' }}">Log in</a>
+                <a href="{{ route('login') }}" class="nav-link {{ Request::path() == 'login' ? 'active' : '' }}">Ingresar</a>
             </li>
             @if (Route::has('register'))
             <li class="nav-item">
-                <a href="{{ route('register') }}" class="nav-link {{ Request::path() == 'register' ? 'active' : '' }}">Register</a>
+                <a href="{{ route('register') }}" class="nav-link {{ Request::path() == 'register' ? 'active' : '' }}">Registrarse</a>
             </li>
             @endif
             @endauth
             @endif
+            <li>
+                <x-app.themeChanger></x-app.themeChanger>
+            </li>
         </ul>
     </div>
 </div>
